@@ -1,0 +1,2 @@
+ALTER TABLE "public".APPLICATION_PARAMETER
+ADD note varchar(50) NULL;

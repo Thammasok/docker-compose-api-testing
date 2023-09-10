@@ -1,0 +1,28 @@
+databaseChangeLog:
+   - changeSet:
+      id: 0.1.0 Create application parameter table
+      author: nutz
+      changes:
+         - sqlFile:
+            path: changelogs/20230701_01_CREATE_APPLICATION_PARAMETER.sql
+         - rollback:
+            - sqlFile:
+               path: changelogs/rollbacks/20230701_01_CREATE_APPLICATION_PARAMETER.sql
+   - changeSet:
+      id: 0.1.1 Insert data 'WEB' in application parameter table
+      author: nutz
+      changes:
+         - sqlFile:
+            path: changelogs/20230701_02_INSERT_APPLICATION_PARAMETER.sql
+         - rollback:
+            - sqlFile:
+                path: changelogs/rollbacks/20230701_02_INSERT_APPLICATION_PARAMETER.sql
+   - changeSet:
+      id: 0.1.2 Alter column 'note' on application parameter table
+      author: nutz
+      changes:
+         - sqlFile:
+            path: changelogs/20230703_01_ALTER_COLUMN.sql
+         - rollback:
+            - sqlFile:
+                path: changelogs/rollbacks/20230703_01_ALTER_COLUMN.sql
