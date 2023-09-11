@@ -8,7 +8,7 @@ services:
     environment:
       POSTGRES_USER: pguser
       POSTGRES_PASSWORD: pgpwd
-      POSTGRES_DB: app
+      POSTGRES_DB: app-db
     volumes:
       - ./initial-db:/docker-entrypoint-initdb.d/
     healthcheck: # check initial finish by number of table number is 55
@@ -34,7 +34,7 @@ services:
     environment:
       COMMAND: 'updatetestingrollback'
       # COMMAND: "${COMMAND:-rollbackcount 1}"
-      DATABASE_URL: host.docker.internal:5432/app
+      DATABASE_URL: host.docker.internal:5432/app-db
       USERNAME: pguser
       PASSWORD: pgpwd
       SCHEMA_NAME: public
@@ -59,28 +59,32 @@ services:
     command: --configfile /imposters/imposters.ejs --allowInjection
 
   # Start Service
-  # api:
-  #   container_name: api
-  #   build:
-  #     context: ../
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - 3001:3001
-  #   networks:
-  #     - test-network
-  #   env_file:
-  #     - ../.env
-  #   extra_hosts:
-  #     - 'host.docker.internal:host-gateway'
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://host.docker.internal:3001/app/health"]
-  #     interval: 30s
-  #     retries: 10
-  #     start_period: 20s
-  #     timeout: 10s
-  #   depends_on:
-  #     db-migration:
-  #       condition: service_completed_successfully
+  api:
+    container_name: api
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    ports:
+      - 8002:8002
+    env_file:
+      - .env.test
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://host.docker.internal:8002"]
+      interval: 30s
+      retries: 10
+      start_period: 20s
+      timeout: 10s
+    networks:
+      - test-network
+    links:
+      - redis
+    depends_on:
+      redis:
+        condition: service_healthy
+      db-migration:
+        condition: service_completed_successfully
 
   # Start APIs Testing
   api-test:
@@ -95,9 +99,9 @@ services:
       - 'host.docker.internal:host-gateway'
     environment:
       HOST: 'http://host.docker.internal:5000'
-    # depends_on:
-    #   api:
-    #     condition: service_healthy
+    depends_on:
+      api:
+        condition: service_healthy
 
 networks:
   test-network:

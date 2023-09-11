@@ -5,7 +5,7 @@ COPY changelog-root.yml /liquibase/
 COPY changelogs /liquibase/changelogs/
 
 ENV SCHEMA_NAME = "public"
-ENV DATABASE_URL = "host.docker.internal:5433/cryptopat"
+ENV DATABASE_URL = "host.docker.internal:5432/app-db"
 ENV USERNAME = "pguser"
 ENV PASSWORD = "pgpwd"
 ENV COMMAND = ""
