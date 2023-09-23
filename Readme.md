@@ -31,18 +31,18 @@ APIs Testing will use Postman for write test scripts and run via [newman](https:
 Go to root project
 
 ```bash
- cd cryptoplat-service-auth
+ cd your_project
 ```
 
 Run docker
 ```bash
-docker compose -f ./api-testing/docker-compose.yml --env-file ./api-testing/.env.test up --build -d
+docker compose up -d
 ```
 
 Stop docker
 
 ```bash
-docker compose -f ./api-testing/docker-compose.yml down -v
+docker compose down -v
 ```
 
 ---
@@ -50,7 +50,7 @@ docker compose -f ./api-testing/docker-compose.yml down -v
 ## via Makefile
 
 ```bash
- cd cryptoplat-service-auth/api-testing
+ cd your_project
 ```
 
 Run Container
