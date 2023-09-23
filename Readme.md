@@ -14,15 +14,15 @@ APIs Testing will use Postman for write test scripts and run via [newman](https:
 
 ## Structures
 
-  ./
-    ├── initial-db                   # Initial Database
-    ├── migration                    # Database Migration
-    ├── mountebank                   # Mocking 3rd Party
-    ├── postman                      # APIs Testing Script
-    ├── .env.test
-    ├── docker-compose.yml
-    ├── Makefile
-    └── README.md
+    ./
+      ├── initial-db                   # Initial Database
+      ├── migration                    # Database Migration
+      ├── mountebank                   # Mocking 3rd Party
+      ├── postman                      # APIs Testing Script
+      ├── .env.test
+      ├── docker-compose.yml
+      ├── Makefile
+      └── README.md
 
 ---
 
