@@ -5,6 +5,7 @@ all: start_db db_migration run_mock_api run_api run_newman down_service all_done
 down_service:
 	docker compose -f $(DOCKER_COMPOSE_FILE) down
 
+# Run APIs Testing Step
 start_db:
 	docker compose -f $(DOCKER_COMPOSE_FILE) up db -d --build;
 
@@ -17,8 +18,8 @@ run_mock_api:
 run_api:
 	docker compose -f $(DOCKER_COMPOSE_FILE) --env-file ./.env.poc up api -d --build;
 
-run_newman:
-	docker compose -f $(DOCKER_COMPOSE_FILE) up api-test --exit-code-from api-test --build; \
+run_test:
+	docker compose -f $(DOCKER_COMPOSE_FILE) up api-test --exit-code-from api-test --build;
 
 all_done:
 	echo "All step done"

@@ -78,13 +78,6 @@ services:
       timeout: 10s
     networks:
       - test-network
-    links:
-      - redis
-    depends_on:
-      redis:
-        condition: service_healthy
-      db-migration:
-        condition: service_completed_successfully
 
   # Start APIs Testing
   api-test:
@@ -99,9 +92,6 @@ services:
       - 'host.docker.internal:host-gateway'
     environment:
       HOST: 'http://host.docker.internal:5000'
-    depends_on:
-      api:
-        condition: service_healthy
 
 networks:
   test-network:

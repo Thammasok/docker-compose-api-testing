@@ -1,0 +1,6 @@
+# Newman report
+newman
+newman/*
+
+postman/reports/
+postman/reports/*
